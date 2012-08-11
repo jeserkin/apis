@@ -8,7 +8,7 @@ function __autoload( $className )
 {
 	$fileExists = false;
 
-	if ( false === strpos( $className, '_' ) )
+	if ( false === strpos( $className, '\\' ) )
 	{
 		$fileExists = file_exists( __DIR__ . '/libs/' . $className . '.php' );
 
@@ -24,7 +24,7 @@ function __autoload( $className )
 
 	if ( ! $fileExists )
 	{
-		$classPath       = explode( '_', $className );
+		$classPath       = explode( '\\', $className );
 		$singleApiExists = file_exists( __DIR__ . '/' . implode( '/', $classPath ) . '/' . end( $classPath ) . '.php' );
 
 		if ( $singleApiExists )

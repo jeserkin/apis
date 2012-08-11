@@ -3,8 +3,9 @@
  * @author  Eugene Serkin <jserkin@gmail.com>
  * @version $Id$
  */
+namespace Api\Music;
 
-class Api_Music_Lastfm
+class Lastfm
 {
 	const
 		VERSION = '2.0',
@@ -19,6 +20,11 @@ class Api_Music_Lastfm
 	 * @var string
 	 */
 	private $apiKey;
+
+	/**
+	 * @var array
+	 */
+	private $apiResources = array();
 
 	/**
 	 * @param string $apiKey
@@ -43,5 +49,18 @@ class Api_Music_Lastfm
 	public function getApiKey()
 	{
 		return $this->apiKey;
+	}
+
+	/**
+	 * @return \Api\Music\Lastfm\Album\Resource
+	 */
+	public function getAlbum()
+	{
+		if ( ! isset( $this->apiResources['album'] ) )
+		{
+			$this->apiResources['album'] = new \Api\Music\Lastfm\Album\Resource( $this );
+		}
+
+		return $this->apiResources['album'];
 	}
 }
